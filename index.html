@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CartEka</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .banner-carousel {
+            width: 100%;
+            height: 300px;
+        }
+        .carousel-item {
+            height: 100%;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .carousel-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgb(0, 0, 0);
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 0px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .carousel-item img {
+                width: 100%;
+                height: auto;  /* Maintain aspect ratio with 1:1 square for mobile */
+                object-fit: cover;
+            }
+
+            .col-md-3 {
+                width: 50%;  /* 2 items per row on mobile */
+                margin-bottom: 20px;  /* Add space between items */
+            }
+            .card {
+                margin-bottom: 15px;  /* Adjust space between cards on mobile */
+            }
+            .carousel-caption {
+                font-size: 24px;  /* Smaller text on mobile */
+            }
+        }
+
+
+        .col-md-3 {
+            margin-bottom: 30px; /* Adds space between the rows of items */
+        }
+
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 20px; /* Adds space between the cards themselves */
+        }
+
+        .stock-available {
+            font-weight: bold;
+        }
+        .in-stock {
+            color: green;
+        }
+        .out-of-stock {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="font-size: 52px;">CartEka</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Carousel for Background Images -->
+    <div id="bannerCarousel" class="carousel slide banner-carousel" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://th.bing.com/th/id/OIP.Hz5111TUGWzLUWkKIN_EJAHaEc?w=1920&h=1152&rs=1&pid=ImgDetMain" alt="Image 1">
+                <div class="carousel-caption d-none d-md-block" id="carousel-caption">
+                    Welcome to Mata Shop
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://th.bing.com/th/id/OIP.jgQzW6opFPF_f7H7HWsjAQHaFj?w=1060&h=795&rs=1&pid=ImgDetMain" alt="Image 2">
+                <div class="carousel-caption d-none d-md-block" id="carousel-caption">
+                    Discover Great Deals!
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://thumbs.dreamstime.com/z/shopping-line-online-store-website-mobile-application-d-rendering-background-digital-marketing-shop-concept-167415548.jpg" alt="Image 3">
+                <div class="carousel-caption d-none d-md-block" id="carousel-caption">
+                    Shop Your Favorite Items
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://img.freepik.com/premium-photo/online-shopping-isometric-smartphone-image_351527-27.jpg?w=2000" alt="Image 4">
+                <div class="carousel-caption d-none d-md-block" id="carousel-caption">
+                    Best Prices Await You!
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- Item 1 Card -->
+            <div class="col-md-3">
+                <div class="card">
+                    <!-- Carousel for Item 1 -->
+                    <div id="item-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://katsstore.com/cdn/shop/files/DSC_0434.jpg?v=1700302806&width=940" class="d-block w-100" alt="Item 1 Image 1" onclick="nextImage('item-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.letshopz.com/storage/shoes-4.jpg" class="d-block w-100" alt="Item 1 Image 2" onclick="nextImage('item-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://th.bing.com/th/id/OIP.US3-rTlTbEB8DAHnJMhkYwHaHa?w=740&h=740&rs=1&pid=ImgDetMain" class="d-block w-100" alt="Item 1 Image 3" onclick="nextImage('item-carousel')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Item 2</h5>
+                        <p class="card-text">Price: $10</p>
+                        <p class="card-text stock-available" id="stock-item-1">Stock Available: 5</p> <!-- Updated stock here -->
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 2 Card -->
+            <div class="col-md-3">
+                <div class="card">
+                    <!-- Carousel for Item 2 -->
+                    <div id="item2-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://th.bing.com/th/id/OIP.US3-rTlTbEB8DAHnJMhkYwHaHa?w=740&h=740&rs=1&pid=ImgDetMain" class="d-block w-100" alt="Item 2 Image 1" onclick="nextImage('item2-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://katsstore.com/cdn/shop/files/DSC_0434.jpg?v=1700302806&width=940" class="d-block w-100" alt="Item 2 Image 2" onclick="nextImage('item2-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.letshopz.com/storage/shoes-4.jpg" class="d-block w-100" alt="Item 2 Image 3" onclick="nextImage('item2-carousel')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Item 2</h5>
+                        <p class="card-text">Price: $50</p>
+                        <p class="card-text stock-available" id="stock-item-2">Stock Available: 0</p> <!-- Updated stock here -->
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 3 Card -->
+            <div class="col-md-3">
+                <div class="card">
+                    <!-- Carousel for Item 3 -->
+                    <div id="item3-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://www.letshopz.com/storage/shoes-4.jpg" class="d-block w-100" alt="Item 3 Image 1" onclick="nextImage('item3-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://katsstore.com/cdn/shop/files/DSC_0434.jpg?v=1700302806&width=940" class="d-block w-100" alt="Item 3 Image 2" onclick="nextImage('item3-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://th.bing.com/th/id/OIP.US3-rTlTbEB8DAHnJMhkYwHaHa?w=740&h=740&rs=1&pid=ImgDetMain" class="d-block w-100" alt="Item 3 Image 3" onclick="nextImage('item3-carousel')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Item 3</h5>
+                        <p class="card-text">Price: $5</p>
+                        <p class="card-text stock-available" id="stock-item-3">Stock Available: 5</p> <!-- Updated stock here -->
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 4 Card -->
+            <div class="col-md-3">
+                <div class="card">
+                    <!-- Carousel for Item 4 -->
+                    <div id="item4-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://www.letshopz.com/storage/shoes-4.jpg" class="d-block w-100" alt="Item 4 Image 1" onclick="nextImage('item4-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://katsstore.com/cdn/shop/files/DSC_0434.jpg?v=1700302806&width=940" class="d-block w-100" alt="Item 4 Image 2" onclick="nextImage('item4-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://th.bing.com/th/id/OIP.US3-rTlTbEB8DAHnJMhkYwHaHa?w=740&h=740&rs=1&pid=ImgDetMain" class="d-block w-100" alt="Item 4 Image 3" onclick="nextImage('item4-carousel')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Item 4</h5>
+                        <p class="card-text">Price: $25</p>
+                        <p class="card-text stock-available" id="stock-item-4">Stock Available: 5</p> <!-- Updated stock here -->
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 5 Card -->
+            <div class="col-md-3">
+                <div class="card">
+                    <!-- Carousel for Item 5 -->
+                    <div id="item5-carousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://www.letshopz.com/storage/shoes-4.jpg" class="d-block w-100" alt="Item 5 Image 1" onclick="nextImage('item5-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://katsstore.com/cdn/shop/files/DSC_0434.jpg?v=1700302806&width=940" class="d-block w-100" alt="Item 5 Image 2" onclick="nextImage('item5-carousel')">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://th.bing.com/th/id/OIP.US3-rTlTbEB8DAHnJMhkYwHaHa?w=740&h=740&rs=1&pid=ImgDetMain" class="d-block w-100" alt="Item 5 Image 3" onclick="nextImage('item5-carousel')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Item 5</h5>
+                        <p class="card-text">Price: $250</p>
+                        <p class="card-text stock-available" id="stock-item-5">Stock Available: 0</p> <!-- Updated stock here -->
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        // Function to move to the next image in a specific carousel
+        function nextImage(carouselId) {
+            $('#' + carouselId).carousel('next');
+        }
+
+        // Function to update the stock color based on availability
+        function updateStockColor() {
+            const stockItems = [
+                { id: "stock-item-1", stock: 3 },
+                { id: "stock-item-2", stock: 0 },
+                { id: "stock-item-3", stock: 8 },
+                { id: "stock-item-4", stock: 3 },
+                { id: "stock-item-5", stock: 0 }
+            ];
+
+            stockItems.forEach(item => {
+                const stockElement = document.getElementById(item.id);
+                if (item.stock > 0) {
+                    stockElement.classList.add("in-stock");
+                    stockElement.classList.remove("out-of-stock");
+                } else {
+                    stockElement.classList.add("out-of-stock");
+                    stockElement.classList.remove("in-stock");
+                }
+            });
+        }
+
+        // Call the function to apply stock color when the page loads
+        updateStockColor();
+    </script>
+</body>
+</html>
