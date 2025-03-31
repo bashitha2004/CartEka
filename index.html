@@ -10,9 +10,11 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
+            overflow-x: hidden;
         }
         .navbar {
             background-color: #fffffd;
+            padding: 10px 0;
         }
         .navbar-brand, .nav-link {
             color: white !important;
@@ -20,17 +22,29 @@
         .navbar-brand img {
             width: 150px;
             height: auto;
+            transition: all 0.3s;
+        }
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 1.25em;
+            height: 1.25em;
         }
         .banner-carousel {
             width: 100%;
-            height: 300px;
+            height: auto;
+            max-height: 300px;
         }
         .carousel-item {
-            height: 100%;
+            height: auto;
         }
         .carousel-item img {
             width: 100%;
-            height: 300px;
+            height: auto;
+            max-height: 300px;
             object-fit: cover;
         }
         .carousel-caption {
@@ -39,193 +53,185 @@
             left: 50%;
             transform: translateX(-50%);
             color: rgb(0, 0, 0);
-            font-size: 36px;
+            font-size: 24px;
             font-weight: bold;
+            width: 100%;
+            padding: 0 15px;
         }
         .container {
-            margin-top: 30px;
+            margin-top: 20px;
+            padding: 0 15px;
         }
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 768px) {
-            .carousel-item img {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-            }
-            .col-md-3 {
-                width: 50%;
-                margin-bottom: 20px;
-            }
-            .card {
-                margin-bottom: 15px;
-            }
-            .carousel-caption {
-                font-size: 24px;
-            }
-        }
-
-        .col-md-3 {
-            margin-bottom: 30px;
-        }
-
         .card {
             transition: transform 0.3s;
             margin-bottom: 20px;
+            border: 2px solid #ddd;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        .card:hover {
+            transform: scale(1.03);
         }
 
+        /* Stock Availability */
         .stock-available {
             font-weight: bold;
         }
-
-        /* Stock Availability Colors */
         .in-stock {
             color: green;
         }
-
         .out-of-stock {
             color: red;
         }
 
-        .search-bar {
-            width: 400px;
-            margin-left: 20px;
+        /* Buttons */
+        .custom-btn, .custom-btn1 {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            width: 120px;
+            height: 40px;
+            font-size: 16px;
+            margin: 10px auto;
+            display: block;
         }
 
-        .auth-buttons {
-            margin-left: 20px;
-        }
-
-        .auth-buttons .btn {
-            margin-left: 10px;
-        }
-
-        .navbar .welcome-message {
-            margin-left: 20px;
-            font-weight: bold;
-        }
-        .custom-btn {
-            position: absolute;
-            top: -10px;
-            left: -15px;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 50px;
-            font-size: 18px;
-        }
-        .custom-btn1 {
-            position: absolute;
-            top: -10px;
-            left: 600px;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 50px;
-            font-size: 18px;
-        }
+        /* Footer */
         .footer {
             background-color: rgb(219, 219, 219);
-            padding: 40px 0;
+            padding: 30px 0;
             color: #333;
             font-size: 14px;
         }
         .footer-text {
-            background-color: #333; /* Change this to your desired background color */
-            color: #fff; /* Text color */
+            background-color: #333;
+            color: #fff;
             padding: 10px;
             border-radius: 5px;
+            margin: 10px 0;
+        }
+        .social-links a {
+            margin: 0 8px;
         }
 
-        .footer h5 {
+        /* Product Cards */
+        .card img {
+            height: 200px;
+            object-fit: contain;
+            padding: 10px;
+        }
+        .card-title {
             font-size: 16px;
             font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .footer a {
             color: #333;
-            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            margin-bottom: 10px;
         }
 
-        .footer a:hover {
-            color: #0066cc;
-            text-decoration: underline;
+        /* Reviews Section */
+        #reviews-container {
+            margin-top: 30px;
+        }
+        .review-card {
+            margin-bottom: 20px;
         }
 
-        .footer .form-control {
-            height: 38px;
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                width: 120px;
+            }
+            
+            .carousel-caption {
+                font-size: 18px;
+                bottom: 10px;
+            }
+            
+            .custom-btn, .custom-btn1 {
+                width: 100px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .col-md-3 {
+                width: 50%;
+                padding: 0 8px;
+            }
+            
+            .card img {
+                height: 150px;
+            }
+            
+            .footer {
+                padding: 20px 0;
+            }
+            
+            .social-links a {
+                margin: 0 5px;
+            }
+            
+            .container h3 {
+                font-size: 1.5rem;
+            }
         }
 
-        .footer .btn-primary {
-            background-color: #0066cc;
-            border-color: #0066cc;
-        }
-
-        .footer .list-unstyled li {
-            margin-bottom: 8px;
-        }
-        
-        .social-links {
-            margin-bottom: 15px;
-        }
-        
-        .social-links a {
-            margin: 0 10px;
+        @media (max-width: 576px) {
+            .col-md-3 {
+                width: 100%;
+            }
+            
+            .carousel-caption {
+                font-size: 16px;
+            }
+            
+            .navbar-brand img {
+                width: 100px;
+            }
+            
+            .search-bar {
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="https://media-hosting.imagekit.io/2d158ed224a34d58/logopng2.png?Expires=1837965692&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=D6u0VMUk4puLlBc4QBrJhaFlEv3NRrCN3iUrwYSfw5iKCzNr8N6-NbpCygKyhczUD-kRGhhS66haeA3Un2R0mnVkbpIBhHIJCGu0BIsI24mtaKH5v~j5hCMcd7nJmjMmz7q7Y2dAlIgBgIWQYYghBdUY3xR7tyemYqkAQQE2ICAkbetnJAo9DLFo--Wy1ZY~ja8GvnZ9nDJDISpkavhTnlI93pdzqZrlzon1Dw8Wk2M5e~9qEUy9CgUtbwj~dIIDrgvY8syiF8U3bRb5ZVeCfmykkUpywo3gV3TFGa3q9ylw61VAIBviV3illhQnnuZhP2cP5SBFeNAujb6oZjrXyg__" alt="CartEka Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-
-                <!-- Search Bar -->
-                <form class="d-flex">
+                <form class="d-flex ms-auto my-2 my-lg-0">
                     <input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-
-                <!-- Auth Buttons and Welcome Message -->
-                <div class="auth-buttons">
-                    <span class="welcome-message">Welcome, User!</span>
-                    <button class="btn btn-outline-primary">Sign in</button>
-                    <button class="btn btn-outline-secondary">Register</button>
-                </div>
             </div>
         </div>
     </nav>
     
     <!-- Carousel for Background Images -->
-    <div id="bannerCarousel" class="carousel slide banner-carousel" data-bs-ride="carousel" data-bs-interval="2000">
+    <div id="bannerCarousel" class="carousel slide banner-carousel" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="https://media-hosting.imagekit.io/bd23cac332a14616/webbanner%203.jpg?Expires=1838002528&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=UFkofKTIe-14TqJlyk~KrvbD-uLlbJMKAeZx1o9BHsfotX-~7-uiwqQyum8V8qsSCbC8YqoLkr5CE3rWVlaFB1wGPYVEBXDJ-TYTqS5uNg~Jn3XYzP3nySiCvrvnAtOGCT6GdrBRUArn0OXMBvqIauQO0~VVPEqiHmEYfRRdsYeSEa8QE~S-Q19scHKUakdFv3XkqmK7z9C39vwQydTFtB2Y7EN6fzp3f1Z7zhksXA2ix9SbrH1BpeK8FqaSn7dj19ob~fgNRmRavm2mZA~XFIPZSwA4e~pQhDlP63KiZwJCk7-6AssV6ixGScmWF4Na9uYSc-m~1J6Ln8JbjH8omw__" class="d-block w-100" alt="Image 3">
-                <div class="carousel-caption d-none d-md-block text-center">
-                <button class="btn btn-primary custom-btn1">BUY NOW</button>
+                <img src="https://media-hosting.imagekit.io/bd23cac332a14616/webbanner%203.jpg?Expires=1838002528&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=UFkofKTIe-14TqJlyk~KrvbD-uLlbJMKAeZx1o9BHsfotX-~7-uiwqQyum8V8qsSCbC8YqoLkr5CE3rWVlaFB1wGPYVEBXDJ-TYTqS5uNg~Jn3XYzP3nySiCvrvnAtOGCT6GdrBRUArn0OXMBvqIauQO0~VVPEqiHmEYfRRdsYeSEa8QE~S-Q19scHKUakdFv3XkqmK7z9C39vwQydTFtB2Y7EN6fzp3f1Z7zhksXA2ix9SbrH1BpeK8FqaSn7dj19ob~fgNRmRavm2mZA~XFIPZSwA4e~pQhDlP63KiZwJCk7-6AssV6ixGScmWF4Na9uYSc-m~1J6Ln8JbjH8omw__" class="d-block w-100" alt="Banner 1">
+                <div class="carousel-caption">
+                    <button class="btn btn-primary custom-btn1">BUY NOW</button>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="https://media-hosting.imagekit.io/d51e358f9b8c431b/webbanner%202.jpg?Expires=1838001581&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OwsOO09ciWngwiGr5-3J43ST60JC9gIoB2Pb4aAVhnn2L7IENY3zwI5HQgCoEcQDpqBDNiec~bEHCvXRHVslpFf2Uk~MAKIpkWu63zKHd5wsDf~JnKr7oyIaE8R~~zCWfkzqT1lG2hZj~87Z9nWSIsFdR4X1npCvd-rckqmZ3TmRgcOOHvTn3ocoKaDG7fCDjmKPQzca-PXlXx6IgqGGPOWRJXCoLA-CTxY7duLGPBkPYl3UXNoROxc6~f7PwRc8v6cUvyRoohPJWaLZm~87AD63ElDHD9pIZZULM~ZbYnkr~h25DXHx-zqehxS6R1ca9HWBi3fuu~ZU0SRm~bezjw__" class="d-block w-100" alt="Image 2">
-                <div class="carousel-caption d-none d-md-block text-center">
-                </div>
+                <img src="https://media-hosting.imagekit.io/d51e358f9b8c431b/webbanner%202.jpg?Expires=1838001581&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OwsOO09ciWngwiGr5-3J43ST60JC9gIoB2Pb4aAVhnn2L7IENY3zwI5HQgCoEcQDpqBDNiec~bEHCvXRHVslpFf2Uk~MAKIpkWu63zKHd5wsDf~JnKr7oyIaE8R~~zCWfkzqT1lG2hZj~87Z9nWSIsFdR4X1npCvd-rckqmZ3TmRgcOOHvTn3ocoKaDG7fCDjmKPQzca-PXlXx6IgqGGPOWRJXCoLA-CTxY7duLGPBkPYl3UXNoROxc6~f7PwRc8v6cUvyRoohPJWaLZm~87AD63ElDHD9pIZZULM~ZbYnkr~h25DXHx-zqehxS6R1ca9HWBi3fuu~ZU0SRm~bezjw__" class="d-block w-100" alt="Banner 2">
             </div>
             <div class="carousel-item">
-                <img src="https://media-hosting.imagekit.io/e8da75bd812042d6/webbanner%201.jpg?Expires=1838000610&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=BpSyxLYiz8mPGx8tQfIYgMSMxdGKeD8h4ndsX7QNA8H~ESwhih0QpFLOU-wXCKoxPMFzbZy8RCZAYbwDSXxOP6IFwVV5ysOtaiVUOGOvv4eBSLA4ED~9c-jlOarsPG5sPa3wEuF8w2UECDiutCOjfBsMioQlbACylYlFae2bG3nlk0u6Jn8pGpR7zBbqSHVO7SMaVBncteCj9DgfE66H40IL-glT99iM3jPQOjYi0LLUdmzOS80wwc7BoVlfzBFkuahkyz3~YKIhEu-~~OxAp0NVpARiN2D3xbNRGM9XO8K7zvt7gnWoFMEkr13VwSgWVPnWzNdOEnko~GcdViuK9w__" class="d-block w-100" alt="Image 1">
-                <div class="carousel-caption d-none d-md-block text-center">
-                <button class="btn btn-primary custom-btn">BUY NOW</button>
+                <img src="https://media-hosting.imagekit.io/e8da75bd812042d6/webbanner%201.jpg?Expires=1838000610&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=BpSyxLYiz8mPGx8tQfIYgMSMxdGKeD8h4ndsX7QNA8H~ESwhih0QpFLOU-wXCKoxPMFzbZy8RCZAYbwDSXxOP6IFwVV5ysOtaiVUOGOvv4eBSLA4ED~9c-jlOarsPG5sPa3wEuF8w2UECDiutCOjfBsMioQlbACylYlFae2bG3nlk0u6Jn8pGpR7zBbqSHVO7SMaVBncteCj9DgfE66H40IL-glT99iM3jPQOjYi0LLUdmzOS80wwc7BoVlfzBFkuahkyz3~YKIhEu-~~OxAp0NVpARiN2D3xbNRGM9XO8K7zvt7gnWoFMEkr13VwSgWVPnWzNdOEnko~GcdViuK9w__" class="d-block w-100" alt="Banner 3">
+                <div class="carousel-caption">
+                    <button class="btn btn-primary custom-btn">BUY NOW</button>
                 </div>
             </div>
         </div>
@@ -240,120 +246,30 @@
     </div>
     
     <div class="container">
+        <h3 class="text-center mb-4">Product List</h3>
         <div class="row" id="product-list">
             <!-- Dynamic product items will go here -->
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        // Replace with your Google Sheets API key and spreadsheet ID
-        const API_KEY = 'AIzaSyDV9L0P8S-lZ5VVBwM0NHFnk1peiPYLo7Y';
-        const SPREADSHEET_ID = '1MNjMBJ2ciKf7iQRTTYMRbYcdL8HRrSmc6K9ZbE-W3cM';
-
-        // Fetch data from Google Sheets
-        function fetchItems() {
-    const range = 'Sheet1'; // Change if necessary
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
-    
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);  // Log the entire data to debug
-            
-            if (data.values) {
-                const items = data.values;
-                const productList = document.getElementById('product-list');
-                
-                // Loop through the items and dynamically add them to the page
-                for (let i = 1; i < items.length; i++) { // Start from 1 to skip the header
-                    const [name, price, imageUrl, stock, link] = items[i];
-                    
-                    // Create product card dynamically
-                    const colDiv = document.createElement('div');
-                    colDiv.classList.add('col-md-3');
-                    
-                    const cardDiv = document.createElement('div');
-                    cardDiv.classList.add('card');
-                    
-                    const carouselDiv = document.createElement('div');
-                    carouselDiv.classList.add('carousel', 'slide');
-                    carouselDiv.setAttribute('data-bs-ride', 'carousel');
-                    
-                    const carouselInnerDiv = document.createElement('div');
-                    carouselInnerDiv.classList.add('carousel-inner');
-                    
-                    const carouselItemDiv = document.createElement('div');
-                    carouselItemDiv.classList.add('carousel-item', 'active');
-                    
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    img.classList.add('d-block', 'w-100');
-                    img.alt = name;
-                    
-                    carouselItemDiv.appendChild(img);
-                    carouselInnerDiv.appendChild(carouselItemDiv);
-                    carouselDiv.appendChild(carouselInnerDiv);
-                    cardDiv.appendChild(carouselDiv);
-                    
-                    const cardBodyDiv = document.createElement('div');
-                    cardBodyDiv.classList.add('card-body');
-                    
-                    const cardTitle = document.createElement('h5');
-                    cardTitle.classList.add('card-title');
-                    cardTitle.textContent = name;
-                    
-                    const cardPrice = document.createElement('p');
-                    cardPrice.classList.add('card-text');
-                    cardPrice.textContent = `Price: $${price}`;
-                    
-                    const stockStatus = document.createElement('p');
-                    stockStatus.classList.add('card-text', 'stock-available');
-                    stockStatus.textContent = `Stock Available: ${stock}`;
-                    
-                    // Change color based on stock
-                    if (parseInt(stock) > 0) {
-                        stockStatus.classList.add('in-stock');
-                    } else {
-                        stockStatus.classList.add('out-of-stock');
-                    }
-                    
-                    const buyButton = document.createElement('a');
-                    buyButton.href = link;
-                    buyButton.classList.add('btn', 'btn-primary');
-                    buyButton.target = '_blank';
-                    buyButton.textContent = 'Buy Now';
-                    
-                    cardBodyDiv.appendChild(cardTitle);
-                    cardBodyDiv.appendChild(cardPrice);
-                    cardBodyDiv.appendChild(stockStatus);
-                    cardBodyDiv.appendChild(buyButton);
-                    
-                    cardDiv.appendChild(cardBodyDiv);
-                    colDiv.appendChild(cardDiv);
-                    
-                    productList.appendChild(colDiv);
-                }
-            } else {
-                console.error('Invalid data format');
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-
-        // Call the function when the page loads
-        window.onload = function() {
-            fetchItems();
-        };
-        
-    </script>
+    <div class="container mt-4">
+        <h3 class="text-center mb-4">Customer Reviews</h3>
+        <div id="reviews-container" class="row">
+            <!-- Reviews will appear here -->
+        </div>
+        <div id="review-nav" class="text-center mt-3" style="display: none;">
+            <button id="prev-review" class="btn btn-sm btn-outline-secondary mx-1">
+                <img src="https://cdn-icons-png.flaticon.com/512/271/271220.png" alt="Previous" style="width: 20px; height: 20px;">
+            </button>
+            <button id="next-review" class="btn btn-sm btn-outline-secondary mx-1">
+                <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Next" style="width: 20px; height: 20px;">
+            </button>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">           
-            <div class="row mt-4">
+            <div class="row">
                 <div class="col-12 text-center">
                     <div class="social-links">
                         <a href="https://www.instagram.com/cart_eka?igsh=em94OTgya201OHFs&utm_source=ig_contact_invite" target="_blank"><img src="https://th.bing.com/th/id/ODLS.7e9375d5-26a4-4702-bb17-c140827dc762?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2" alt="Instagram" style="width: 30px; height: 30px;"></a>
@@ -362,10 +278,10 @@
                         <a href="#" target="_blank"><img src="https://th.bing.com/th/id/ODLS.50fab04a-0a4f-4927-bd9f-8da06c12d918?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="WhatsApp" style="width: 30px; height: 30px;"></a>
                     </div>
 
-                    <div class="mt-3">
-                        <a href="#">Terms and conditions</a> | 
-                        <a href="#">Privacy</a> | 
-                        <a href="#">Maintained by CartEka Team</a>
+                    <div class="mt-3 mb-3">
+                        <a href="#" class="text-decoration-none">Terms and conditions</a> | 
+                        <a href="#" class="text-decoration-none">Privacy</a> | 
+                        <a href="#" class="text-decoration-none">Maintained by CartEka Team</a>
                     </div>
                     
                     <div class="container">
@@ -376,19 +292,261 @@
         </div>
     </footer>
     
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {};
-        var Tawk_LoadStart = new Date();
-        (function(){
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/67ea51ffed09f71909aaaee1/default'; // Replace this with your widget ID
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Replace with your Google Sheets API key and spreadsheet ID
+        const API_KEY = 'AIzaSyDV9L0P8S-lZ5VVBwM0NHFnk1peiPYLo7Y';
+        const SPREADSHEET_ID = '1MNjMBJ2ciKf7iQRTTYMRbYcdL8HRrSmc6K9ZbE-W3cM';
+
+        // Fetch data from Google Sheets
+        function fetchItems() {
+            const range = 'Sheet1!A:E';
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${range}?key=${API_KEY}`;
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!data.values || data.values.length < 2) {
+                        console.error('No data found in the sheet');
+                        return;
+                    }
+                    
+                    const productList = document.getElementById('product-list');
+                    productList.innerHTML = '';
+                    
+                    // Skip header row (index 0)
+                    data.values.slice(1).forEach((row, index) => {
+                        const [name, price, imageUrl, stock, link] = row;
+                        
+                        // Skip empty rows
+                        if (!name) return;
+                        
+                        const colDiv = document.createElement('div');
+                        colDiv.className = 'col-md-3 col-6 mb-4';
+                        
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = 'card h-100';
+                        
+                        // Product Image
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = 'product-image-container d-flex align-items-center';
+                        imgDiv.style.height = '200px';
+                        imgDiv.style.overflow = 'hidden';
+                        
+                        const img = document.createElement('img');
+                        img.src = imageUrl || 'https://via.placeholder.com/300';
+                        img.className = 'card-img-top img-fluid mx-auto';
+                        img.alt = name;
+                        img.style.objectFit = 'contain';
+                        img.style.maxHeight = '100%';
+                        
+                        imgDiv.appendChild(img);
+                        
+                        // Card Body
+                        const cardBody = document.createElement('div');
+                        cardBody.className = 'card-body d-flex flex-column';
+                        
+                        const title = document.createElement('h5');
+                        title.className = 'card-title';
+                        title.textContent = name;
+                        
+                        const priceEl = document.createElement('p');
+                        priceEl.className = 'card-text';
+                        priceEl.textContent = `Rs. ${price}`;
+                        
+                        const stockEl = document.createElement('p');
+                        stockEl.className = `stock-available ${parseInt(stock) > 0 ? 'in-stock' : 'out-of-stock'}`;
+                        stockEl.textContent = parseInt(stock) > 0 ? 'In Stock' : 'Out of Stock';
+                        
+                        const btn = document.createElement('a');
+                        btn.href = link || '#';
+                        btn.className = `btn btn-primary w-100 mt-auto ${parseInt(stock) <= 0 ? 'disabled' : ''}`;
+                        btn.textContent = 'Buy Now';
+                        btn.target = '_blank';
+                        
+                        // Append elements
+                        cardBody.appendChild(title);
+                        cardBody.appendChild(priceEl);
+                        cardBody.appendChild(stockEl);
+                        cardBody.appendChild(btn);
+                        
+                        cardDiv.appendChild(imgDiv);
+                        cardDiv.appendChild(cardBody);
+                        
+                        colDiv.appendChild(cardDiv);
+                        productList.appendChild(colDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                    document.getElementById('product-list').innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <h4>Error loading products</h4>
+                            <p>Please try again later</p>
+                        </div>
+                    `;
+                });
+        }
+
+        // Reviews functionality
+        const API_KEY1 = 'AIzaSyDV9L0P8S-lZ5VVBwM0NHFnk1peiPYLo7Y';
+        const SPREADSHEET_ID1 = '1MNjMBJ2ciKf7iQRTTYMRbYcdL8HRrSmc6K9ZbE-W3cM';
+        const RANGE1 = 'Reviews';
+        const REVIEWS_PER_PAGE = 4;
+        
+        let allReviews = [];
+        let currentPage = 0;
+        let totalPages = 0;
+        let rotationInterval;
+
+        async function fetchReviews() {
+            try {
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID1}/values/${RANGE1}?key=${API_KEY1}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (!data.values) return [];
+                
+                return data.values.slice(1).map(row => ({
+                    name: row[0],
+                    date: row[1],
+                    rating: parseInt(row[2]),
+                    comment: row[3]
+                }));
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+                return [];
+            }
+        }
+
+        function displayReviews(page) {
+            const container = document.getElementById('reviews-container');
+            const startIdx = page * REVIEWS_PER_PAGE;
+            const endIdx = startIdx + REVIEWS_PER_PAGE;
+            const pageReviews = allReviews.slice(startIdx, endIdx);
+            
+            container.style.opacity = 0;
+            
+            setTimeout(() => {
+                container.innerHTML = pageReviews.map(review => `
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card h-100 review-card">
+                            <div class="card-body text-center">
+                                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=random" 
+                                    class="rounded-circle mb-3" 
+                                    alt="${review.name}" 
+                                    style="width:80px;height:80px;object-fit:cover;">
+                                <h5 class="card-title">${review.name}</h5>
+                                <small class="text-muted d-block mb-2">${review.date}</small>
+                                <div class="mb-2 text-warning">
+                                    ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                                </div>
+                                <p class="card-text">
+                                    <span class="d-block fw-bold mb-2">recommends</span>
+                                    ${review.comment}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.style.opacity = 1;
+                updateNavigation();
+            }, 300);
+        }
+
+        function updateNavigation() {
+            const nav = document.getElementById('review-nav');
+            const prevBtn = document.getElementById('prev-review');
+            const nextBtn = document.getElementById('next-review');
+            
+            if (totalPages > 1) {
+                nav.style.display = 'block';
+                prevBtn.disabled = currentPage === 0;
+                nextBtn.disabled = currentPage >= totalPages - 1;
+                
+                prevBtn.querySelector('img').style.opacity = currentPage === 0 ? '0.5' : '1';
+                nextBtn.querySelector('img').style.opacity = currentPage >= totalPages - 1 ? '0.5' : '1';
+            } else {
+                nav.style.display = 'none';
+            }
+        }
+
+        function setupAutoRotation() {
+            if (rotationInterval) {
+                clearInterval(rotationInterval);
+            }
+            
+            if (totalPages > 1) {
+                rotationInterval = setInterval(() => {
+                    currentPage = (currentPage + 1) % totalPages;
+                    displayReviews(currentPage);
+                }, 5000);
+            }
+        }
+
+        function resetAutoRotation() {
+            if (rotationInterval) {
+                clearInterval(rotationInterval);
+                setupAutoRotation();
+            }
+        }
+
+        async function initReviews() {
+            allReviews = await fetchReviews();
+            totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
+            
+            if (allReviews.length === 0) {
+                document.getElementById('reviews-container').innerHTML = 
+                    '<p class="text-center">No reviews yet. Be the first to review!</p>';
+                return;
+            }
+            
+            displayReviews(0);
+            setupAutoRotation();
+            
+            document.getElementById('prev-review').addEventListener('click', () => {
+                if (currentPage > 0) {
+                    currentPage--;
+                    displayReviews(currentPage);
+                    resetAutoRotation();
+                }
+            });
+            
+            document.getElementById('next-review').addEventListener('click', () => {
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    displayReviews(currentPage);
+                    resetAutoRotation();
+                }
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchItems();
+            initReviews();
+        });
     </script>
 
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/67ea51ffed09f71909aaaee1/1inll0jpk';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
 </body>
 </html>
-
