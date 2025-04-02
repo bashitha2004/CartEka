@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | CartEka</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 0.8rem 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+
+        /* Main Content */
+        .container.my-5 {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Product Card */
+        .card {
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-checkout-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-checkout-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Form Styles */
+        #checkoutForm {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: slideInRight 0.6s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+        }
+        
+        .required-field::after {
+            content: " *";
+            color: red;
+        }
+        
+        /* Button Styles */
+        .btn {
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        /* Order Confirmation */
+        #orderConfirmation {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border: 1px solid #28a745;
+            border-radius: 12px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .confirmation-icon {
+            font-size: 60px;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .product-description {
+            white-space: pre-line;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons a, .action-buttons button {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        /* Footer Styles with Animations */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 2.5rem 0;
+            border-top: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #25D366, #E4405F, #3b5998, #010101);
+            background-size: 300% 300%;
+            animation: gradientBG 8s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .social-links a:hover::after {
+            transform: scale(1);
+        }
+
+        .social-links img {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Platform-specific hover effects */
+        .social-links a:nth-child(1):hover { background: #E4405F; } /* Instagram */
+        .social-links a:nth-child(2):hover { background: #3b5998; } /* Facebook */
+        .social-links a:nth-child(3):hover { background: #010101; } /* TikTok */
+        .social-links a:nth-child(4):hover { background: #25D366; } /* WhatsApp */
+
+        .footer-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer a {
+            color: #495057;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0 0.5rem;
+        }
+
+        .footer a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0.5rem;
+            width: calc(100% - 1rem);
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #25D366;
+            text-decoration: none;
+        }
+
+        .footer a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Floating animation for social icons */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .social-links a {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .social-links a:nth-child(1) { animation-delay: 0.1s; }
+        .social-links a:nth-child(2) { animation-delay: 0.2s; }
+        .social-links a:nth-child(3) { animation-delay: 0.3s; }
+        .social-links a:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #28a745;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .navbar-brand img {
+                height: 35px;
+            }
+            
+            .product-checkout-image {
+                height: 150px;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .social-links a {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .footer-text {
+                font-size: 0.8rem;
+            }
+            
+            #checkoutForm, #orderConfirmation {
+                padding: 20px;
+            }
+            
+            .action-buttons a, .action-buttons button {
+                flex: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container.my-5 {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .card-body {
+                padding: 15px;
+            }
+            
+            .confirmation-icon {
+                font-size: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://media-hosting.imagekit.io/2d158ed224a34d58/logopng2.png?Expires=1837965692&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=D6u0VMUk4puLlBc4QBrJhaFlEv3NRrCN3iUrwYSfw5iKCzNr8N6-NbpCygKyhczUD-kRGhhS66haeA3Un2R0mnVkbpIBhHIJCGu0BIsI24mtaKH5v~j5hCMcd7nJmjMmz7q7Y2dAlIgBgIWQYYghBdUY3xR7tyemYqkAQQE2ICAkbetnJAo9DLFo--Wy1ZY~ja8GvnZ9nDJDISpkavhTnlI93pdzqZrlzon1Dw8Wk2M5e~9qEUy9CgUtbwj~dIIDrgvY8syiF8U3bRb5ZVeCfmykkUpywo3gV3TFGa3q9ylw61VAIBviV3illhQnnuZhP2cP5SBFeNAujb6oZjrXyg__" alt="CartEka Logo">
+            </a>
+            <div class="ms-auto">
+                <a href="index.html" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <!-- Product Summary -->
+            <div class="col-md-6 mb-4">
+                <h3 class="mb-4">Your Order</h3>
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img id="checkoutProductImage" src="" class="img-fluid rounded-start product-checkout-image" alt="Product Image">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 id="checkoutProductName" class="card-title"></h5>
+                                <p id="checkoutProductPrice" class="card-text text-danger fw-bold"></p>
+                                <p id="checkoutProductStock" class="card-text"></p>
+                                <div class="product-description">
+                                    <strong>Description:</strong>
+                                    <div id="productDescription"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div class="col-md-6">
+                <h3 class="mb-4">Delivery Details</h3>
+                <form id="checkoutForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label required-field">Full Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label required-field">Address</label>
+                        <textarea class="form-control" id="address" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label required-field">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="whatsapp" class="form-label required-field">WhatsApp Number</label>
+                        <input type="tel" class="form-control" id="whatsapp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email (Optional)</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Confirm Order
+                        </button>
+                    </div>
+                    <div id="loadingSpinner" class="loading-spinner"></div>
+                </form>
+
+                <!-- Order Confirmation Section -->
+                <div id="orderConfirmation">
+                    <div class="text-center">
+                        <div class="confirmation-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Order Confirmed!</h3>
+                        <p>Thank you for your purchase. We'll contact you shortly.</p>
+                        
+                        <div class="order-details mt-4 text-start">
+                            <h5>Order Summary</h5>
+                            <div id="confirmationDetails"></div>
+                        </div>
+                        
+                        <!-- Contact Information -->
+                        <div class="contact-info text-start mt-4">
+                            <h5>Contact Us</h5>
+                            <p><i class="fas fa-phone me-2"></i> <strong>Phone:</strong> <span id="displayWhatsappNumber">0713482507</span></p>
+                            <p><i class="fab fa-whatsapp me-2"></i> <strong>WhatsApp:</strong> <a href="#" id="whatsappLink">Click to Chat</a></p>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="action-buttons">
+                            <a href="index.html" class="btn btn-success">
+                                <i class="fas fa-home me-2"></i>Back to Home
+                            </a>
+                            <button id="whatsappBtn" class="btn btn-success">
+                                <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">           
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/cart_eka?igsh=em94OTgya201OHFs&utm_source=ig_contact_invite" target="_blank" aria-label="Instagram"><img src="https://th.bing.com/th/id/ODLS.7e9375d5-26a4-4702-bb17-c140827dc762?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/share/1EffbKRwgZ/" target="_blank" aria-label="Facebook"><img src="https://th.bing.com/th/id/ODLS.ed551f5f-86b4-4f3c-b131-c5f6234517b7?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2" alt="Facebook"></a>
+                        <a href="https://www.tiktok.com/@cart.eka?_t=ZS-8vABbFecy82&_r=1" target="_blank" aria-label="TikTok"><img src="https://th.bing.com/th/id/ODLS.699c5d73-1f1a-4c76-87fa-af9787fd40df?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="TikTok"></a>
+                        <a href="#" target="_blank" aria-label="WhatsApp"><img src="https://th.bing.com/th/id/ODLS.50fab04a-0a4f-4927-bd9f-8da06c12d918?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="WhatsApp"></a>
+                    </div>
+
+                    <div class="mt-3 mb-3">
+                        <a href="#" class="text-decoration-none">Terms and conditions</a> | 
+                        <a href="#" class="text-decoration-none">Privacy</a> | 
+                        <a href="#" class="text-decoration-none">Maintained by CartEka Team</a>
+                    </div>
+                    
+                    <div class="container">
+                        <p class="footer-text">© 2025 CartEka. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Configuration
+        const CONFIG = {
+            BUSINESS_WHATSAPP: '94713482507',
+            FORMATTED_NUMBER: '071-3482507',
+            GOOGLE_SHEET_ID: '1MNjMBJ2ciKf7iQRTTYMRbYcdL8HRrSmc6K9ZbE-W3cM',
+            API_KEY: 'AIzaSyDV9L0P8S-lZ5VVBwM0NHFnk1peiPYLo7Y',
+            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz-dhVvcG176QX2eCGgMw_8HLSAvHLjCb6iIZ4EOHsZGUJFEsnql4NylZpsK5hJ7HA34Q/exec'
+        };
+
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add scroll event listener for navbar
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Load product details
+            loadCheckoutProduct();
+        });
+
+        // Load product details
+        async function loadCheckoutProduct() {
+            try {
+                // Show loading state
+                document.getElementById('checkoutProductName').textContent = "Loading product...";
+                
+                const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.GOOGLE_SHEET_ID}/values/Sheet1?key=${CONFIG.API_KEY}`);
+                const data = await response.json();
+                
+                if (!data.values) throw new Error('No data found');
+                
+                const products = data.values.slice(1);
+                const product = products.find(p => {
+                    const productName = p[0]?.toLowerCase().replace(/\s+/g, '-');
+                    return productName === productId;
+                });
+                
+                if (!product) throw new Error('Product not found');
+                
+                const [name, price, imageUrl, stock, link, description] = product;
+                
+                // Update page elements
+                document.getElementById('checkoutProductName').textContent = name;
+                document.getElementById('checkoutProductImage').src = imageUrl || 'https://via.placeholder.com/300';
+                document.getElementById('checkoutProductImage').alt = name;
+                document.getElementById('checkoutProductPrice').textContent = `Rs. ${price}`;
+                document.getElementById('checkoutProductStock').textContent = stock > 0 ? '✅ In Stock' : '❌ Out of Stock';
+                document.getElementById('checkoutProductStock').className = stock > 0 ? 'text-success' : 'text-danger';
+                
+                // Update description
+                const descElement = document.getElementById('productDescription');
+                descElement.innerHTML = (description && description.trim() !== '') ? 
+                    description.replace(/\n/g, '<br>') : 'No description available';
+                
+                if (parseInt(stock) <= 0) {
+                    alert('This product is currently out of stock!');
+                    window.location.href = 'index.html';
+                }
+            } catch (error) {
+                console.error('Error loading product:', error);
+                alert('Error loading product details. Please try again later.');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Save order to Google Sheet
+        async function saveOrderToSheet(orderData) {
+            try {
+                const loadingSpinner = document.getElementById('loadingSpinner');
+                loadingSpinner.style.display = 'block';
+                
+                const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                
+                loadingSpinner.style.display = 'none';
+                console.log('Order saved successfully');
+                return true;
+            } catch (error) {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                console.error('Error saving order:', error);
+                return false;
+            }
+        }
+
+        // Setup WhatsApp functionality
+        function setupWhatsApp() {
+            // Display business WhatsApp number
+            document.getElementById('displayWhatsappNumber').textContent = CONFIG.FORMATTED_NUMBER;
+            
+            // Set up WhatsApp link
+            document.getElementById('whatsappLink').href = `https://wa.me/${CONFIG.BUSINESS_WHATSAPP}`;
+            
+            // WhatsApp button click handler
+            document.getElementById('whatsappBtn').addEventListener('click', function() {
+                const productName = document.getElementById('checkoutProductName').textContent;
+                const productPrice = document.getElementById('checkoutProductPrice').textContent;
+                const customerName = document.getElementById('name').value;
+                const customerPhone = document.getElementById('phone').value;
+                const customerWhatsapp = document.getElementById('whatsapp').value;
+                const customerAddress = document.getElementById('address').value;
+                
+                const message = `Hello CartEka,\n\nI just ordered:\nProduct: ${productName}\nPrice: ${productPrice}\n\nMy Details:\nName: ${customerName}\nPhone: ${customerPhone}\nWhatsApp: ${customerWhatsapp}\nAddress: ${customerAddress}`;
+                const encodedMessage = encodeURIComponent(message);
+                window.open(`https://wa.me/${CONFIG.BUSINESS_WHATSAPP}?text=${encodedMessage}`, '_blank');
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const productName = document.getElementById('checkoutProductName').textContent;
+            const productPrice = document.getElementById('checkoutProductPrice').textContent;
+            const productDescription = document.getElementById('productDescription').textContent;
+            const customerName = document.getElementById('name').value.trim();
+            const customerAddress = document.getElementById('address').value.trim();
+            const customerPhone = document.getElementById('phone').value.trim();
+            const customerWhatsapp = document.getElementById('whatsapp').value.trim();
+            const customerEmail = document.getElementById('email').value.trim();
+            const orderDate = new Date().toLocaleString();
+            
+            // Validate required fields
+            if (!customerName || !customerAddress || !customerPhone || !customerWhatsapp) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Validate phone numbers
+            if (!/^\d+$/.test(customerPhone) || !/^\d+$/.test(customerWhatsapp)) {
+                alert('Phone numbers should contain only digits');
+                return;
+            }
+            
+            // Prepare order data
+            const orderData = {
+                productName,
+                productPrice,
+                productDescription,
+                customerName,
+                customerAddress,
+                customerPhone,
+                customerWhatsapp,
+                customerEmail: customerEmail || 'N/A',
+                orderDate,
+            };
+            
+            // Save to Google Sheet
+            const saveSuccess = await saveOrderToSheet(orderData);
+            
+            // Prepare confirmation details
+            const confirmationHTML = `
+                <p><strong>Product:</strong> ${productName}</p>
+                <p><strong>Price:</strong> ${productPrice}</p>
+                <p><strong>Order Date:</strong> ${orderDate}</p>
+                <hr>
+                <p><strong>Customer Name:</strong> ${customerName}</p>
+                <p><strong>Address:</strong> ${customerAddress}</p>
+                <p><strong>Phone:</strong> ${customerPhone}</p>
+                <p><strong>WhatsApp:</strong> ${customerWhatsapp}</p>
+                ${customerEmail ? `<p><strong>Email:</strong> ${customerEmail}</p>` : ''}
+                ${!saveSuccess ? `<p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Note: Order details might not have been saved to our system. Please contact us if you don't receive a confirmation.</p>` : ''}
+            `;
+            
+            // Show confirmation section
+            document.getElementById('confirmationDetails').innerHTML = confirmationHTML;
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('orderConfirmation').style.display = 'block';
+            
+            // Setup WhatsApp functionality
+            setupWhatsApp();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Add to browser history
+            history.pushState({}, '', '#order-confirmed');
+        });
+    </script>
+</body>
+</html>
