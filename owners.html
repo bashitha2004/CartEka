@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | CartEka</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --transition: all 0.3s ease;
+            --primary-color: #25D366;
+            --secondary-color: #E4405F;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            padding-top: 70px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--light-color);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 30px 0;
+        }
+        
+        .team-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            padding: 0 15px;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            padding: 0 15px;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .team-member:nth-child(1) { animation-delay: 0.1s; }
+        .team-member:nth-child(2) { animation-delay: 0.3s; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .member-info::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        .member-name {
+            font-weight: 700;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .member-position {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .member-about {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand:hover img {
+            transform: scale(1.05);
+        }
+        
+        .btn-continue {
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 2.5rem 0;
+            border-top: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+            margin-top: auto;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fa 100%);
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), #3b5998, #010101);
+            background-size: 300% 300%;
+            animation: gradientBG 8s ease infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        .footer .social-links a {
+            display: inline-flex;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .footer .social-links a:nth-child(1) { animation-delay: 0.1s; }
+        .footer .social-links a:nth-child(2) { animation-delay: 0.2s; }
+        .footer .social-links a:nth-child(3) { animation-delay: 0.3s; }
+        .footer .social-links a:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .footer .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .footer .social-links a:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .footer .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .footer .social-links a:hover::after {
+            transform: scale(1);
+        }
+        
+        .footer .social-links i {
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            color: #555;
+        }
+        
+        .footer .social-links a:hover i {
+            color: white;
+            transform: scale(1.2);
+        }
+        
+        /* Platform-specific hover effects */
+        .footer .social-links a:nth-child(1):hover { 
+            background: #E4405F;
+            box-shadow: 0 8px 25px rgba(228, 64, 95, 0.3);
+        }
+        .footer .social-links a:nth-child(2):hover { 
+            background: #3b5998;
+            box-shadow: 0 8px 25px rgba(59, 89, 152, 0.3);
+        }
+        .footer .social-links a:nth-child(3):hover { 
+            background: #010101;
+            box-shadow: 0 8px 25px rgba(1, 1, 1, 0.3);
+        }
+        .footer .social-links a:nth-child(4):hover { 
+            background: #25D366;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+        
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.3rem 0;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-text {
+            color: #777;
+            text-align: center;
+            margin: 0;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.7s forwards;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .navbar-brand img {
+                height: 35px;
+            }
+            
+            .btn-continue {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .team-members {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .member-image {
+                height: 250px;
+            }
+            
+            .footer .social-links a {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .footer .social-links i {
+                font-size: 1rem;
+            }
+            
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 0.9rem;
+            }
+            
+            .team-member {
+                margin: 0 10px;
+            }
+            
+            .member-image {
+                height: 200px;
+            }
+            
+            .member-info {
+                padding: 15px;
+            }
+            
+            .footer .social-links {
+                gap: 1rem;
+            }
+            
+            .footer .social-links a {
+                width: 38px;
+                height: 38px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://media-hosting.imagekit.io/2d158ed224a34d58/logopng2.png?Expires=1837965692&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=D6u0VMUk4puLlBc4QBrJhaFlEv3NRrCN3iUrwYSfw5iKCzNr8N6-NbpCygKyhczUD-kRGhhS66haeA3Un2R0mnVkbpIBhHIJCGu0BIsI24mtaKH5v~j5hCMcd7nJmjMmz7q7Y2dAlIgBgIWQYYghBdUY3xR7tyemYqkAQQE2ICAkbetnJAo9DLFo--Wy1ZY~ja8GvnZ9nDJDISpkavhTnlI93pdzqZrlzon1Dw8Wk2M5e~9qEUy9CgUtbwj~dIIDrgvY8syiF8U3bRb5ZVeCfmykkUpywo3gV3TFGa3q9ylw61VAIBviV3illhQnnuZhP2cP5SBFeNAujb6oZjrXyg__" alt="CartEka Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="ms-auto">
+                <a href="index.html" class="btn btn-outline-secondary btn-continue">
+                    <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
+        <div class="team-section">
+            <div class="section-title">
+                <h2>Meet Our Team</h2>
+                <p>We're a passionate team dedicated to bringing you the best shopping experience. Get to know the people behind CartEka.</p>
+            </div>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="John Doe" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">John Doe</h3>
+                        <span class="member-position">CEO & Founder</span>
+                        <p class="member-about">With over 10 years of experience in e-commerce, John founded CartEka with a vision to revolutionize online shopping in Sri Lanka.</p>
+                        <div class="social-links">
+                            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Jane Smith" loading="lazy">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Jane Smith</h3>
+                        <span class="member-position">Marketing Director</span>
+                        <p class="member-about">Jane leads our marketing efforts with innovative strategies that have grown our customer base by 300% in just one year.</p>
+                        <div class="social-links">
+                            <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" target="_blank" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">           
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/cart_eka?igsh=em94OTgya201OHFs&utm_source=ig_contact_invite" target="_blank" aria-label="Instagram"><img src="https://th.bing.com/th/id/ODLS.7e9375d5-26a4-4702-bb17-c140827dc762?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/share/1EffbKRwgZ/" target="_blank" aria-label="Facebook"><img src="https://th.bing.com/th/id/ODLS.ed551f5f-86b4-4f3c-b131-c5f6234517b7?w=32&h=32&qlt=90&pcl=fffffc&o=6&pid=1.2" alt="Facebook"></a>
+                        <a href="https://www.tiktok.com/@cart.eka?_t=ZS-8vABbFecy82&_r=1" target="_blank" aria-label="TikTok"><img src="https://th.bing.com/th/id/ODLS.699c5d73-1f1a-4c76-87fa-af9787fd40df?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="TikTok"></a>
+                        <a href="#" target="_blank" aria-label="WhatsApp"><img src="https://th.bing.com/th/id/ODLS.50fab04a-0a4f-4927-bd9f-8da06c12d918?w=32&h=32&qlt=90&pcl=fffffa&o=6&pid=1.2" alt="WhatsApp"></a>
+                    </div>
+
+                    <div class="mt-3 mb-3">
+                        <a href="#" class="text-decoration-none">Terms and conditions</a> | 
+                        <a href="#" class="text-decoration-none">Privacy</a> | 
+                        <a href="#" class="text-decoration-none">Maintained by CartEka Team</a>
+                    </div>
+                    
+                    <div class="container">
+                        <p class="footer-text">© 2025 CartEka. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            teamMembers.forEach(member => {
+                observer.observe(member);
+            });
+            
+            // Reduce motion preference
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) {
+                document.querySelectorAll('[style*="animation"]').forEach(el => {
+                    el.style.animation = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
